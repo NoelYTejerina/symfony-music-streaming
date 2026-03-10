@@ -193,8 +193,9 @@ Incluye un reproductor HTML5, búsqueda instantánea, subida de canciones, roles
 
 🗂️ Diagramas
 
-	📘 Diagrama ER (Mermaid)
+	## 📘 Diagrama ER (Mermaid)
 
+```mermaid
 erDiagram
 
     %% ============================
@@ -277,10 +278,10 @@ erDiagram
     Perfil }o--o{ Estilo : "prefiere"
 
 
+## 🎯 Diagrama de Casos de Uso
 
-🎯 Diagrama de Casos de Uso
 
-
+```mermaid
 flowchart TD
 
 %% ============================
@@ -358,6 +359,7 @@ Admin --> CU_AdminEstilos
 Admin --> CU_AdminPerfiles
 
 
+
 -------------
 
 🛠️ Instalación y ejecución
@@ -426,4 +428,5 @@ MIT License.
 🤝 Autor
 
 Noel Y. Tejerina  
+
 GitHub: https://github.com/NoelYTejerina
