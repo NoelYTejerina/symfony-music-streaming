@@ -192,15 +192,10 @@ Incluye un reproductor HTML5, búsqueda instantánea, subida de canciones, roles
 -------------
 
 🗂️ Diagramas
-
-	## 📘 Diagrama ER (Mermaid)
+## 📘 Diagrama ER
 
 ```mermaid
 erDiagram
-
-    %% ============================
-    %% ENTIDADES PRINCIPALES
-    %% ============================
 
     Usuario {
         int id PK
@@ -244,10 +239,6 @@ erDiagram
         string visibilidad
     }
 
-    %% ============================
-    %% TABLAS PUENTE
-    %% ============================
-
     PlaylistCancion {
         int id PK
     }
@@ -260,98 +251,52 @@ erDiagram
         int id PK
     }
 
-    %% ============================
-    %% RELACIONES
-    %% ============================
+    Usuario ||--|| Perfil : tiene
+    Usuario ||--o{ UsuarioPlaylist : crea
+    Playlist ||--o{ UsuarioPlaylist : pertenece
 
-    Usuario ||--|| Perfil : "tiene"
-    Usuario ||--o{ UsuarioPlaylist : "crea"
-    Playlist ||--o{ UsuarioPlaylist : "pertenece"
+    Playlist ||--o{ PlaylistCancion : contiene
+    Cancion ||--o{ PlaylistCancion : pertenece
 
-    Playlist ||--o{ PlaylistCancion : "contiene"
-    Cancion ||--o{ PlaylistCancion : "pertenece"
+    Usuario ||--o{ UsuarioCancion : interactua
+    Cancion ||--o{ UsuarioCancion : es_escuchada_por
 
-    Usuario ||--o{ UsuarioCancion : "interactúa"
-    Cancion ||--o{ UsuarioCancion : "es escuchada por"
-
-    Cancion }o--|| Estilo : "tiene estilo"
-    Perfil }o--o{ Estilo : "prefiere"
-
+    Cancion }o--|| Estilo : tiene_estilo
+    Perfil }o--o{ Estilo : prefiere
+```
 
 ## 🎯 Diagrama de Casos de Uso
 
 ```mermaid
-erDiagram
+flowchart LR
 
-    Usuario {
-        int id PK
-        string email
-        string password
-        string nombre
-        date fecha_nacimiento
-        json roles
-    }
+    Usuario((Usuario))
+    Admin((Admin))
 
-    Perfil {
-        int id PK
-        string foto
-        string descripcion
-        string pais
-        string genero
-        string ocupacion
-    }
+    Registrar[Registrarse]
+    Login[Iniciar sesión]
+    Escuchar[Escuchar canción]
+    Buscar[Buscar música]
+    CrearPlaylist[Crear playlist]
+    AnadirCancion[Añadir canción a playlist]
 
-    Cancion {
-        int id PK
-        string titulo
-        string autor
-        string album
-        int duracion
-        int anio
-        string archivo
-        string imagen
-    }
+    GestionUsuarios[Gestionar usuarios]
+    GestionCanciones[Gestionar canciones]
+    GestionPlaylists[Gestionar playlists]
+    GestionEstilos[Gestionar estilos]
 
-    Estilo {
-        int id PK
-        string nombre
-        string imagen
-    }
+    Usuario --> Registrar
+    Usuario --> Login
+    Usuario --> Escuchar
+    Usuario --> Buscar
+    Usuario --> CrearPlaylist
+    Usuario --> AnadirCancion
 
-    Playlist {
-        int id PK
-        string nombre
-        string descripcion
-        string visibilidad
-    }
-
-    PlaylistCancion {
-        int id PK
-    }
-
-    UsuarioCancion {
-        int id PK
-    }
-
-    UsuarioPlaylist {
-        int id PK
-    }
-
-    Usuario ||--|| Perfil : "tiene"
-    Usuario ||--o{ UsuarioPlaylist : "crea"
-    Playlist ||--o{ UsuarioPlaylist : "pertenece"
-
-    Playlist ||--o{ PlaylistCancion : "contiene"
-    Cancion ||--o{ PlaylistCancion : "pertenece"
-
-    Usuario ||--o{ UsuarioCancion : "interactúa"
-    Cancion ||--o{ UsuarioCancion : "es escuchada por"
-
-    Cancion }o--|| Estilo : "tiene estilo"
-    Perfil }o--o{ Estilo : "prefiere"
-` ``
-
-
+    Admin --> GestionUsuarios
+    Admin --> GestionCanciones
+    Admin --> GestionPlaylists
+    Admin --> GestionEstilos
+```
 
 -------------
 
@@ -423,4 +368,5 @@ MIT License.
 Noel Y. Tejerina  
 
 GitHub: https://github.com/NoelYTejerina
+
 
