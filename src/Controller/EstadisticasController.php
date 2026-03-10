@@ -10,19 +10,22 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class EstadisticasController extends AbstractController
 {
-    #[Route('/manager', name: 'estadisticas')]
-    public function index(PlaylistRepository $playlistRepo, UsuarioRepository $usuarioRepo): Response
-    {
-        // Obtener datos de likes por playlist
-        $datos_likes = $playlistRepo->obtenerLikesPorPlaylist();
+   #[Route('/manager', name: 'estadisticas')]
+public function index(
+    PlaylistRepository $playlistRepo,
+    UsuarioRepository $usuarioRepo
+): Response {
 
-        // Obtener distribución de edades de usuarios
-        $edad_datos = $usuarioRepo->clasificarUsuariosXedad();
+    $datos_likes = $playlistRepo->obtenerLikesPorPlaylist();
+    $edad_datos = $usuarioRepo->clasificarUsuariosXedad();
+    $datos_reproducciones = $playlistRepo->obtenerReproduccionesPorPlaylist();
 
-        return $this->render('estadisticas/index.html.twig', [
-            'datos_likes' => $datos_likes,
-            'edad_datos' => $edad_datos,
-        ]);
-    }
+    return $this->render('estadisticas/index.html.twig', [
+        'datos_likes' => $datos_likes,
+        'edad_datos' => $edad_datos,
+        'datos_reproducciones' => $datos_reproducciones,
+    ]);
+}
+
 }
 

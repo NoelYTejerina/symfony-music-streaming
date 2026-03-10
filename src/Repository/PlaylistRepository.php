@@ -140,4 +140,15 @@ public function obtenerLikesPorPlaylist(): array
         ->getResult();
 }
 
+public function obtenerReproduccionesPorPlaylist()
+{
+    return $this->createQueryBuilder('p')
+        ->select('p.nombre AS playlist, SUM(pc.reproducciones) AS totalReproducciones')
+        ->leftJoin('p.playlistCanciones', 'pc')
+        ->groupBy('p.id')
+        ->getQuery()
+        ->getResult();
+}
+
+
 }
