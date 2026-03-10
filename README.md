@@ -331,7 +331,7 @@ http://localhost:8000
 
 🎨 Demo visual
 
-Será añadida con la mayor brevedad 
+https://noelytejerina.github.io/symfony-music-streaming/demo/
 
 -------------
 
@@ -368,5 +368,6 @@ MIT License.
 Noel Y. Tejerina  
 
 GitHub: https://github.com/NoelYTejerina
+
 
 
