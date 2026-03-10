@@ -280,83 +280,76 @@ erDiagram
 
 ## 🎯 Diagrama de Casos de Uso
 
-
 ```mermaid
-flowchart TD
+erDiagram
 
-%% ============================
-%% ACTORES
-%% ============================
+    Usuario {
+        int id PK
+        string email
+        string password
+        string nombre
+        date fecha_nacimiento
+        json roles
+    }
 
-Usuario([Usuario])
-Admin([Administrador])
-Sistema([Plataforma de Streaming])
+    Perfil {
+        int id PK
+        string foto
+        string descripcion
+        string pais
+        string genero
+        string ocupacion
+    }
 
-%% ============================
-%% CASOS DE USO PRINCIPALES
-%% ============================
+    Cancion {
+        int id PK
+        string titulo
+        string autor
+        string album
+        int duracion
+        int anio
+        string archivo
+        string imagen
+    }
 
-subgraph Autenticación
-    CU_Login[Iniciar sesión]
-    CU_Registro[Registrarse]
-    CU_CerrarSesion[Cerrar sesión]
-end
+    Estilo {
+        int id PK
+        string nombre
+        string imagen
+    }
 
-subgraph GestiónUsuario
-    CU_VerPerfil[Ver perfil]
-    CU_EditarPerfil[Editar perfil (pendiente UI)]
-    CU_VerHistorial[Ver historial de reproducción]
-end
+    Playlist {
+        int id PK
+        string nombre
+        string descripcion
+        string visibilidad
+    }
 
-subgraph Canciones
-    CU_VerCancion[Ver canción]
-    CU_ReproducirCancion[Reproducir canción]
-    CU_SubirCancion[Subir canción]
-    CU_BuscarCancion[Buscar canciones]
-end
+    PlaylistCancion {
+        int id PK
+    }
 
-subgraph Playlists
-    CU_CrearPlaylist[Crear playlist]
-    CU_VerPlaylist[Ver playlist]
-    CU_AgregarCancionPlaylist[Añadir canción a playlist]
-    CU_ReproducirPlaylist[Reproducir playlist]
-end
+    UsuarioCancion {
+        int id PK
+    }
 
-subgraph AdminPanel
-    CU_AdminUsuarios[Gestionar usuarios]
-    CU_AdminCanciones[Gestionar canciones]
-    CU_AdminPlaylists[Gestionar playlists]
-    CU_AdminEstilos[Gestionar estilos]
-    CU_AdminPerfiles[Gestionar perfiles]
-end
+    UsuarioPlaylist {
+        int id PK
+    }
 
-%% ============================
-%% RELACIONES
-%% ============================
+    Usuario ||--|| Perfil : "tiene"
+    Usuario ||--o{ UsuarioPlaylist : "crea"
+    Playlist ||--o{ UsuarioPlaylist : "pertenece"
 
-Usuario --> CU_Login
-Usuario --> CU_Registro
-Usuario --> CU_CerrarSesion
+    Playlist ||--o{ PlaylistCancion : "contiene"
+    Cancion ||--o{ PlaylistCancion : "pertenece"
 
-Usuario --> CU_VerPerfil
-Usuario --> CU_EditarPerfil
-Usuario --> CU_VerHistorial
+    Usuario ||--o{ UsuarioCancion : "interactúa"
+    Cancion ||--o{ UsuarioCancion : "es escuchada por"
 
-Usuario --> CU_VerCancion
-Usuario --> CU_ReproducirCancion
-Usuario --> CU_BuscarCancion
-
-Usuario --> CU_CrearPlaylist
-Usuario --> CU_VerPlaylist
-Usuario --> CU_AgregarCancionPlaylist
-Usuario --> CU_ReproducirPlaylist
-
-Admin --> CU_SubirCancion
-Admin --> CU_AdminUsuarios
-Admin --> CU_AdminCanciones
-Admin --> CU_AdminPlaylists
-Admin --> CU_AdminEstilos
-Admin --> CU_AdminPerfiles
+    Cancion }o--|| Estilo : "tiene estilo"
+    Perfil }o--o{ Estilo : "prefiere"
+` ``
 
 
 
@@ -430,3 +423,4 @@ MIT License.
 Noel Y. Tejerina  
 
 GitHub: https://github.com/NoelYTejerina
+
