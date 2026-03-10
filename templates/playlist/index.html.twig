@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Playlists{% endblock %}
+
+{% block content %}
+<main class="playlists-container">
+    <!-- Sección de Playlists Populares -->
+    <section class="playlist-section">
+        <h2>Playlists Populares</h2>
+        <div class="playlist-grid">
+            {% for playlist in playlistsTopLikes %}
+                {% include 'playlist/playlist_card.html.twig' with {
+                    'playlist': playlist,
+                    'totalCanciones': playlist.totalCanciones ?? 0,
+                    'totalDuracion': playlist.totalDuracion ?? 0
+                } %}
+            {% else %}
+                <p>No hay playlists populares.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Sección de Playlists Recientes -->
+    <section class="playlist-section">
+        <h2>Últimas Playlists</h2>
+        <div class="playlist-grid">
+            {% for playlist in playlistsRecientes %}
+                {% include 'playlist/playlist_card.html.twig' with {
+                    'playlist': playlist,
+                    'totalCanciones': playlist.totalCanciones ?? 0,
+                    'totalDuracion': playlist.totalDuracion ?? 0
+                } %}
+            {% else %}
+                <p>No hay playlists recientes.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Sección de Todas las Playlists -->
+    <section class="playlist-section">
+        <h2>Todas las Playlists</h2>
+        <div class="playlist-grid">
+            {% for playlist in todasLasPlaylists %}
+                {% include 'playlist/playlist_card.html.twig' with {
+                    'playlist': playlist,
+                    'totalCanciones': playlist.totalCanciones ?? 0,
+                    'totalDuracion': playlist.totalDuracion ?? 0
+                } %}
+            {% else %}
+                <p>No hay playlists disponibles.</p>
+            {% endfor %}
+        </div>
+    </section>
+     <!-- Módulo del reproductor -->
+    {% include 'reproductor/reproductor.html.twig' %}
+</main>
+
+{% endblock %}

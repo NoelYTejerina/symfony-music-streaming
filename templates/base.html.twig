@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MySpotify{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+</head>
+<body>
+
+<header>
+    <div class="header-top">
+        <div class="logo-container">
+            <img src="{{ asset('imagenes/logoSpoty.png') }}" alt="Spotify Logo">
+            <h1><a href="{{ path('home') }}">MySpotify</a></h1>
+        </div>
+
+        <div class="session">
+            <img src="{{ asset('imagenes/iconosesion.png') }}" alt="Sesión">
+            {% if app.user %}
+                <span>Hola, {{ app.user.nombre }}</span>
+                <a href="{{ path('app_logout') }}" class="btn-logout">Cerrar Sesión</a>
+            {% else %}
+                <a href="{{ path('app_login') }}">Iniciar Sesión</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="#">Canciones</a></li>
+            <li><a href="{{ path('playlist_vista_general_playlists') }}">Playlist</a></li> 
+                   
+        </ul>
+    </nav>
+
+    <!-- Buscador -->
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Buscar...">
+        <button>Buscar</button>
+        <div id="searchResults" class="search-results"></div>
+    </div>
+</header>
+
+<div class="container">
+    {% if app.request.get('_route') not in ['app_login', 'app_register', 'app_perfil'] %}
+        <aside>
+            <ul>
+                <li><a href="#">🎵 Canciones</a></li>
+                <li><a href="{{ path('playlist_vista_general_playlists') }}">📂 Playlist</a></li>
+                   {% if is_granted('ROLE_MANAGER') %}
+                  <li>
+                      <a href="{{ path('estadisticas')}}">📂 Datos de Explotacion</a>
+                  </li>            
+                {% endif %}
+                {% if is_granted('ROLE_USER') %}
+                  <li>
+                      <a href="{{ path('playlist_mis_playlists') }}">📂 Mis Playlist</a>
+                  </li>
+                  <li>
+                      <a href="{{ path('playlist_crear_playlist_form') }}" class="btn btn-primary">+ Crear Playlist</a>
+                  </li>
+                {% endif %}
+            </ul>
+        </aside>
+    {% endif %}
+
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <script>alert("{{ message }}");</script>
+    {% endfor %}
+{% endfor %}
+
+    <script src="{{ asset('script/buscador.js') }}" ></script> 
+</body>
+</html>

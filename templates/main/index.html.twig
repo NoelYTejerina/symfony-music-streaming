@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<main>
+    <!-- Sección de Playlists -->
+    <div class="playlists-section">
+        <h2 class="titulo">Últimas playlists añadidas</h2>
+        <div class="playlists-container">
+            {% for playlist in playlists %}
+                {% include 'playlist/playlist_card.html.twig' with {'playlist': playlist.playlist, 'totalCanciones': playlist.totalCanciones, 'totalDuracion': playlist.totalDuracion} %}
+            {% else %}
+                <p>No hay playlists recientes.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Sección de Canciones -->
+    <div class="songs-section">
+        <h2 class="titulo">Últimas canciones añadidas</h2>
+        <div class="songs-container">
+            {% for cancion in canciones %}
+                {% include 'cancion/cancion_card.html.twig' with {'cancion': cancion} %}
+            {% else %}
+                <p>No hay canciones recientes.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Módulo del reproductor -->
+    {% include 'reproductor/reproductor.html.twig' %}
+</main>
+{% endblock %}

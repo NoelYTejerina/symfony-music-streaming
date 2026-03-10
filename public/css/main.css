@@ -1,0 +1,375 @@
+.container {
+    display: flex;
+    flex-grow: 1;
+    height: calc(100vh - 80px);
+}
+
+
+
+/* ASIDE - Barra lateral */
+aside {
+    width: 220px;
+    background: #181818;
+    color: var(--light-text);
+    padding: 20px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+aside ul {
+    list-style: none;
+    padding: 0;
+}
+
+aside ul li {
+    margin: 15px 0;
+}
+
+aside ul li a {
+    color: var(--light-text);
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+aside ul li a:hover {
+    color: var(--hover-color);
+}
+
+/* CONTENEDOR PRINCIPAL */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    min-height: 100vh;
+}
+
+/* TITULOS */
+.main-content .titulo {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--light-text);
+    margin-bottom: 20px;
+}
+
+/* CONTENEDORES DE PLAYLISTS Y CANCIONES */
+.playlists-container, 
+.songs-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* TARJETAS DE PLAYLISTS Y CANCIONES */
+.playlist-card, .song-card {
+    background: var(--dark-color);
+    padding: 15px;
+    border-radius: 10px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.playlist-card:hover, .song-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 15px var(--primary-color);
+}
+
+/* IMÁGENES EN TARJETAS */
+.playlist-card img, 
+.song-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* INFORMACIÓN DENTRO DE CADA TARJETA */
+.playlist-info h3, 
+.song-info h3 {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: var(--light-text);
+}
+
+.playlist-info p, 
+.song-info p {
+    font-size: 0.9rem;
+    color: var(--light-text);
+    margin: 5px 0;
+}
+
+/* BOTÓN DE DETALLES */
+.detalle-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.detalle-link:hover {
+    background: var(--hover-color);
+}
+
+/* BOTÓN DE REPRODUCCIÓN */
+.reproducir-btn {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.reproducir-btn:hover {
+    background: var(--hover-color);
+}
+
+/* REPRODUCTOR */
+.reproductor-container {
+    width: 100%;
+    background: var(--dark-color);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#cancion-actual {
+    font-size: 1.2rem;
+    color: var(--light-text);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.reproductor-controles {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 15px;
+}
+
+#audioPlayer {
+    flex: 1;
+    width: 50%;
+    max-width: 800px;
+}
+
+/* BOTONES DEL REPRODUCTOR */
+.reproductor-btn {
+    background: black;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.reproductor-btn:hover {
+    background: #333;
+}
+
+/* DETALLE DE PLAYLIST */
+.playlist-detalle-container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.playlist-header img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.lista-canciones {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-canciones li {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+/* CSS del detalle de cancion*/
+
+.detalle-cancion-container {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    background: var(--dark-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Ajuste de imagen de la canción */
+.cancion-imagen {
+    width: 100%;
+    max-width: 400px; /* Evita que la imagen se agrande demasiado */
+    height: auto;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: block;
+    margin: 0 auto; /* Centrar horizontalmente */
+}
+
+.cancion-imagen:hover {
+    transform: scale(1.05);
+}
+
+/* Información de la canción */
+.cancion-info {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.cancion-info h2 {
+    font-size: 1.8rem;
+    color: var(--light-text);
+    margin-bottom: 10px;
+}
+
+.cancion-info p {
+    font-size: 1rem;
+    color: var(--light-text);
+    margin: 5px 0;
+}
+
+/* Botón de reproducir */
+.reproducir-btn {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    background: var(--primary-color);
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 20px auto; /* Centrar horizontalmente */
+}
+
+.reproducir-btn:hover {
+    background: var(--hover-color);
+}
+
+/* Reproductor de música */
+.reproductor-section {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+
+/*para la barra de buscador*/
+
+.search-bar {
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.search-results {
+    position: absolute;
+    top: 40px;
+    background: #181818;
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    display: none;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    z-index: 100;
+}
+
+.search-results h3 {
+    color: var(--light-text);
+    margin: 5px 0;
+    font-size: 1rem;
+    text-align: left;
+}
+
+.search-results ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.search-results li {
+    padding: 8px;
+    border-bottom: 1px solid var(--primary-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.search-results li:hover {
+    background: var(--hover-color);
+}
+
+.search-results a {
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+#searchInput:focus + .search-results {
+    display: block;
+}
+
+
+/*para los resultados de la busqueda*/
+
+.resultados-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.resultados-container h2 {
+    font-size: 2rem;
+    color: var(--light-text);
+    margin-bottom: 15px;
+}
+
+.resultados-container h3 {
+    text-align: left;
+    color: var(--primary-color);
+    margin-top: 20px;
+}
+
+.resultados-container .songs-container,
+.resultados-container .playlists-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+
+

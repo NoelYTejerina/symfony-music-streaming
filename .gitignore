@@ -1,0 +1,40 @@
+### Symfony ###
+/var/
+/vendor/
+/node_modules/
+/public/build/
+/public/bundles/
+/public/uploads/   # si en el futuro hay subidas reales
+.env.local
+.env.*.local
+.env.dev
+.env.dev.local
+.env.test
+.env.test.local
+/.phpunit.result.cache
+/phpunit.xml
+/phpunit.xml.dist
+
+### Docker ###
+/dataMYSQL/
+/docker-compose.override.yml
+
+### Composer ###
+/composer.lock
+
+### Node / Webpack ###
+/package-lock.json
+/yarn.lock
+
+### IDE / Editor ###
+/.idea/
+/.vscode/
+/*.iml
+
+### Logs ###
+/var/log/
+/var/cache/
+
+### OS files ###
+.DS_Store
+Thumbs.db

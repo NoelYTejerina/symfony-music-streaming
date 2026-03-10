@@ -1,0 +1,97 @@
+<div class="reproductor-container">
+    <p id="cancion-actual">Selecciona una canción</p>
+    <div class="reproductor-controles">
+        <button id="prevBtn" class="reproductor-btn">⏮</button>            
+        <audio id="audioPlayer" controls>
+            <source id="audioSource" src="" type="audio/mpeg">
+            Tu navegador no soporta audio HTML5.
+        </audio>
+        <button id="nextBtn" class="reproductor-btn">⏭</button>
+    </div>
+</div>
+
+
+<script>
+    let cancionesPlaylist = []; // Almacena las canciones de la playlist
+    let indiceCancionActual = 0; // Índice de la canción actual
+    const audioPlayer = document.getElementById("audioPlayer");
+    const audioSource = document.getElementById("audioSource");
+    const cancionActual = document.getElementById("cancion-actual");
+    const prevBtn = document.getElementById("prevBtn");
+    
+    const nextBtn = document.getElementById("nextBtn");
+
+    // Función para reproducir una canción
+// Función para reproducir una canción individual
+function reproducirCancionIndividual(element) {
+    const cancionId = element.getAttribute('data-cancion-id');
+    const cancionTitulo = element.getAttribute('data-cancion-titulo');
+
+    // Obtener los detalles de la canción
+    fetch(`/cancion/${cancionId}`, {
+        headers: {
+            'Accept': 'application/json' // Indicar que queremos JSON
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (!data.archivo) {
+            throw new Error("El archivo de la canción no está disponible.");
+        }
+        reproducirCancion(data.archivo, data.titulo);
+    })
+    .catch(error => console.error("Error al obtener la canción:", error));
+}
+
+function reproducirCancion(archivo, titulo) {
+    const audioPlayer = document.getElementById('audioPlayer');
+    const audioSource = document.getElementById('audioSource');
+    const cancionActual = document.getElementById('cancion-actual');
+
+    audioSource.src = "/songs/" + archivo;
+    audioPlayer.load();
+    audioPlayer.play();
+    cancionActual.textContent = "Reproduciendo: " + titulo;
+}
+
+    // Función para cargar y reproducir una playlist
+    function reproducirPlaylist(playlistId) {
+        fetch(`/playlist/${playlistId}/canciones`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    cancionesPlaylist = data; // Almacena las canciones
+                    indiceCancionActual = 0; // Reinicia el índice
+                    reproducirCancion(cancionesPlaylist[0].archivo, cancionesPlaylist[0].titulo); // Reproduce la primera canción
+                }
+            })
+            .catch(error => console.error("Error al cargar la playlist:", error));
+    }
+
+    // Función para cambiar de canción (avanzar o retroceder)
+    function cambiarCancion(direccion) {
+        if (cancionesPlaylist.length === 0) return;
+
+        indiceCancionActual += direccion;
+        if (indiceCancionActual < 0) {
+            indiceCancionActual = cancionesPlaylist.length - 1; // Retrocede a la última canción
+        } else if (indiceCancionActual >= cancionesPlaylist.length) {
+            indiceCancionActual = 0; // Avanza a la primera canción
+        }
+
+        reproducirCancion(cancionesPlaylist[indiceCancionActual].archivo, cancionesPlaylist[indiceCancionActual].titulo);
+    }
+
+    // Event listeners para los botones del reproductor
+    prevBtn.addEventListener("click", () => cambiarCancion(-1)); // Retrocede
+    nextBtn.addEventListener("click", () => cambiarCancion(1)); // Avanza
+  
+
+    // Reproduce la siguiente canción automáticamente al terminar la actual
+    audioPlayer.addEventListener("ended", () => cambiarCancion(1));
+</script>
