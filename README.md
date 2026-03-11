@@ -1,4 +1,4 @@
-🎵 Plataforma de Streaming Musical – Symfony 6 + MySQL + Docker
+🎵 Plataforma de Streaming Musical – Symfony 7 + MySQL + Docker
 
 Plataforma web completa de streaming musical, desarrollada con Symfony 6, Doctrine, EasyAdmin, MySQL y Docker, que permite a los usuarios reproducir canciones, crear playlists, buscar música en tiempo real, gestionar perfiles y administrar contenido desde un panel profesional.
 
@@ -140,7 +140,7 @@ Incluye un reproductor HTML5, búsqueda instantánea, subida de canciones, roles
 
 🧱 Arquitectura
 
-    Symfony 6 (monolito MVC)
+    Symfony 7 (monolito MVC)
 
     Doctrine ORM
 
@@ -304,7 +304,7 @@ flowchart LR
 
 1️⃣ Clonar el repositorio
 
-git clone https://github.com/NoelYTejerina/streaming-musical.git
+git clone https://github.com/NoelYTejerina/symfony-music-streaming.git
 cd streaming-musical
 
 2️⃣ Levantar Docker
@@ -368,6 +368,7 @@ MIT License.
 Noel Y. Tejerina  
 
 GitHub: https://github.com/NoelYTejerina
+
 
 
 
